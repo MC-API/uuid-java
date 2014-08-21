@@ -5,6 +5,13 @@
   <version>0.0.1</version>
   <name>uuid-java</name>
 
+  <repositories>
+    <repository>
+        <id>oss.sonatype.org</id>
+        <url>https://oss.sonatype.org/content/repositories/snapshots/</url>        
+     </repository>
+  </repositories>
+
   <dependencies>
     <dependency>
       <groupId>org.projectlombok</groupId>
