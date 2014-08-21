@@ -1,6 +1,7 @@
-package net.mcapi.uuid;
+package net.mcapi.uuid.utils;
 
 import lombok.Getter;
+import net.mcapi.uuid.UUIDAPI;
 
 import org.json.simple.parser.JSONParser;
 
