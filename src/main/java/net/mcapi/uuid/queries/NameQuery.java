@@ -7,7 +7,6 @@ import java.net.URLConnection;
 import java.util.concurrent.Callable;
 
 import lombok.AllArgsConstructor;
-import lombok.SneakyThrows;
 import net.mcapi.uuid.utils.UUIDUtils;
 
 import org.json.simple.JSONObject;
@@ -21,7 +20,7 @@ public @AllArgsConstructor class NameQuery implements Callable<String> {
     /*
      * Might add the @Cacheable annotation
      */
-    @SneakyThrows @Async public String call() {
+    @Async public String call() throws Exception {
         URL url = new URL("http://mc-api.net/name/" + uuid);
         URLConnection con = url.openConnection();
 

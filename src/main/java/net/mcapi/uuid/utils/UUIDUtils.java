@@ -1,5 +1,7 @@
 package net.mcapi.uuid.utils;
 
+import java.util.UUID;
+
 import lombok.Getter;
 import net.mcapi.uuid.UUIDAPI;
 
@@ -12,22 +14,22 @@ import org.json.simple.parser.JSONParser;
  */
 public class UUIDUtils {
 
-	@Getter private static JSONParser parser = new JSONParser();
+    @Getter private static JSONParser parser = new JSONParser();
 
-	/**
-	 * Convert a string into a string that {@link UUID}.fromString will accept
-	 * 
-	 * @param uuid uuid string (without dashes)
-	 * @return a uuid compatible string 
-	 */
+    /**
+     * Convert a string into a string that {@link UUID}.fromString will accept
+     * 
+     * @param uuid uuid string (without dashes)
+     * @return a uuid compatible string 
+     */
     public static String convertUUIDToJava(String uuid) {
-    	if(uuid.contains("-")) {
-    		return uuid;
-    	}
+        if(uuid.contains("-")) {
+            return uuid;
+        }
 
-    	if(uuid.length() < 32) {
-    		uuid = UUIDAPI.getUUIDString(uuid);
-    	}
+        if(uuid.length() < 32) {
+            uuid = UUIDAPI.getUUIDString(uuid);
+        }
 
         uuid = insertChar(uuid, '-', 8);
         uuid = insertChar(uuid, '-', 13);
