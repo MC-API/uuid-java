@@ -10,9 +10,11 @@ import com.google.common.collect.Maps;
 import com.google.common.primitives.Longs;
 
 /**
- * Represents a hash map where each association may expire after a given time has elapsed.
+ * Represents a hash map where each association may expire after a given time
+ * has elapsed.
  * <p>
- * Note that replaced key-value associations are only collected once the original expiration time has elapsed. 
+ * Note that replaced key-value associations are only collected once the
+ * original expiration time has elapsed. 
  * 
  * @author Kristian Stangeland
  *
@@ -67,6 +69,7 @@ public class ExpireHashMap<K, V> {
     
     /**
      * Construct a new hash map where each entry may expire at a given time.
+     *
      * @param ticker - supplier of the current time.
      */
     public ExpireHashMap(Ticker ticker) {
@@ -75,6 +78,7 @@ public class ExpireHashMap<K, V> {
     
     /**
      * Retrieve the value associated with the given key, if it has not expired.
+     *
      * @param key - the key.
      * @return The value, or NULL if not found or it has expired.
      */
@@ -86,12 +90,14 @@ public class ExpireHashMap<K, V> {
     }
     
     /**
-     * Associate the given key with the given value, until the expire delay have elapsed.
-     * @param key - the key.
-     * @param value - the value.
-     * @param expireDelay - the amount of time until this association expires. Must be greater than zero.
-     * @param expireUnit - the unit of the expiration.
-     * @return Any previously unexpired association with this key, or NULL.
+     * Associate the given key with the given value, until the expire delay have
+     * elapsed.
+     *
+     * @param key the key
+     * @param value the value
+     * @param expireDelay the amount of time until this association expires
+     * @param expireUnit the unit of the expiration
+     * @return Any previously unexpired association with this key, or NULL
      */
     public V put(K key, V value, long expireDelay, TimeUnit expireUnit) {
         Preconditions.checkNotNull(expireUnit, "expireUnit cannot be NULL");
@@ -110,9 +116,11 @@ public class ExpireHashMap<K, V> {
     }
     
     /**
-     * Determine if the given key is referring to an unexpired association in the map.
-      * @param key - the key.
-     * @return TRUE if it is, FALSE otherwise.
+     * Determine if the given key is referring to an unexpired association in
+     * the map.
+     *
+     * @param key the key
+     * @return TRUE if it is, FALSE otherwise
      */
     public boolean containsKey(K key) {
         evictExpired();
@@ -121,9 +129,11 @@ public class ExpireHashMap<K, V> {
     }
     
     /**
-     * Determine if the given value is referring to an unexpired association in the map.
-      * @param value - the value.
-     * @return TRUE if it is, FALSE otherwise.
+     * Determine if the given value is referring to an unexpired association in
+     * the map.
+     *
+     * @param value the value
+     * @return TRUE if it is, FALSE otherwise
      */
     public boolean containsValue(V value) {
         evictExpired();
@@ -140,8 +150,9 @@ public class ExpireHashMap<K, V> {
     
     /**
      * Remove a key and its associated value from the map.
-     * @param key - the key to remove.
-     * @return Value of the removed association, NULL otherwise.
+     *
+     * @param key the key to remove
+     * @return Value of the removed association, NULL otherwise
      */
     public V removeKey(K key) {
         evictExpired();
@@ -152,7 +163,8 @@ public class ExpireHashMap<K, V> {
     
     /**
      * Retrieve the number of entries in the map.
-     * @return The number of entries.
+     *
+     * @return The number of entries
      */
     public int size() {
         evictExpired();
@@ -162,6 +174,7 @@ public class ExpireHashMap<K, V> {
     
     /**
      * Retrieve a view of the keys in the current map.
+     *
      * @return View of the keys.
      */
     public Set<K> keySet() {
@@ -172,6 +185,7 @@ public class ExpireHashMap<K, V> {
     
     /**
      * Retrieve a view of all the values in the current map.
+     *
      * @return All the values.
      */
     public Collection<V> values() {
@@ -182,6 +196,7 @@ public class ExpireHashMap<K, V> {
     
     /**
      * Retrieve a view of all the entries in the set.
+     *
      * @return All the entries.
      */
     public Set<Entry<K, V>> entrySet() {
@@ -191,7 +206,9 @@ public class ExpireHashMap<K, V> {
     }
     
     /**
-     * Retrieve a view of this expire map as an ordinary map that does not support insertion.
+     * Retrieve a view of this expire map as an ordinary map that does not
+     * support insertion.
+     *
      * @return The map.
      */
     public Map<K, V> asMap() {
@@ -201,7 +218,8 @@ public class ExpireHashMap<K, V> {
     }
     
     /**
-     * Clear all references to key-value pairs that have been removed or replaced before they were naturally evicted.
+     * Clear all references to key-value pairs that have been removed or
+     * replaced before they were naturally evicted.
      * <p>
      * This operation requires a linear scan of the current entries in the map.
      */

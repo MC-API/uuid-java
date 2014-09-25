@@ -17,9 +17,7 @@ public @AllArgsConstructor class NameQuery implements Callable<String> {
 
     private String uuid;
 
-    /*
-     * Might add the @Cacheable annotation
-     */
+    // Might add the @Cacheable annotation
     @Async public String call() throws Exception {
         URL url = new URL("http://mc-api.net/name/" + uuid);
         URLConnection con = url.openConnection();

@@ -9,9 +9,9 @@ import net.mcapi.uuid.utils.ExpireHashMap;
 import net.mcapi.uuid.utils.UUIDUtils;
 
 /**
- * A UUID lookup API for Java
+ * A UUID lookup API for Java.
  * <p>
- * Useful to convert a username to {@link UUID} and vice-versa
+ * Useful to convert a username to {@link UUID} and vice-versa.
  * 
  * @author MC-API
  */
@@ -21,9 +21,9 @@ public class UUIDAPI {
     private static ExpireHashMap<UUID, String> names = new ExpireHashMap<UUID, String>();
 
     /**
-     * Find the UUID that matches a username
+     * Find the UUID that matches a username.
      * <p>
-     * Result is cached for one hour
+     * Result is cached for one hour.
      * 
      * @param username username to lookup
      * @return the {@link UUID}
@@ -45,9 +45,9 @@ public class UUIDAPI {
     }
 
     /**
-     * Find the UUID that matches a username
+     * Find the UUID that matches a username.
      * <p>
-     * Result is cached for one hour
+     * Result is cached for one hour.
      * 
      * @param username username to lookup
      * @return a string without dashes
@@ -60,9 +60,9 @@ public class UUIDAPI {
     }
 
     /**
-     * Reverse lookup a {@link UUID} to a username string
+     * Reverse lookup a {@link UUID} to a username string.
      * <p>
-     * Result is cached for one hour
+     * Result is cached for one hour.
      * 
      * @param uuid UUID to lookup
      * @return username or <code>NULL</code> if not found
@@ -84,9 +84,10 @@ public class UUIDAPI {
     }
 
     /**
-     * Reverse lookup a UUID string to a username string, if the string is not a valid UUID it will be converted to one
+     * Reverse lookup a UUID string to a username string, if the string is not a
+     * valid UUID it will be converted to one.
      * <p>
-     * Result is cached for one hour
+     * Result is cached for one hour.
      * 
      * @param uuid uuid (string) to lookup
      * @return username or <code>NULL</code> if not found
