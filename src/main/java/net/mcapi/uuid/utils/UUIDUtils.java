@@ -8,16 +8,14 @@ import net.mcapi.uuid.UUIDAPI;
 import org.json.simple.parser.JSONParser;
 
 /**
- * Utility methods for UUIDs
- * 
- * @author MC-API
+ * Utility methods for UUIDs.
  */
 public class UUIDUtils {
 
     @Getter private static JSONParser parser = new JSONParser();
 
     /**
-     * Convert a string into a string that {@link UUID}.fromString will accept
+     * Convert a string into a string that {@link UUID#fromString} will accept.
      * 
      * @param uuid uuid string (without dashes)
      * @return a uuid compatible string 
