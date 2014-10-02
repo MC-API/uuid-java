@@ -22,7 +22,7 @@ public @AllArgsConstructor class NameQuery implements Callable<String> {
         URL url = new URL("http://mc-api.net/name/" + uuid);
         URLConnection con = url.openConnection();
 
-        con.addRequestProperty("User-Agent", "Mozilla/4.0");
+        con.addRequestProperty("User-Agent", "MC-API Java Client");
         con.connect();
 
         JSONObject jsonReturn = (JSONObject)UUIDUtils.getParser().parse(new BufferedReader(new InputStreamReader(con.getInputStream())));
