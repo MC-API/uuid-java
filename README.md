@@ -1,4 +1,4 @@
-uuid-java
+uuid-java [![Build Status](http://build.mc-api.net/buildStatus/icon?job=uuid-java)](http://build.mc-api.net/job/uuid-java/)
 =========
 
 A Java implementation of the [mc-api.net](http://mc-api.net) API.
