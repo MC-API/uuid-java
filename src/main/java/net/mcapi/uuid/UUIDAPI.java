@@ -1,10 +1,10 @@
 package net.mcapi.uuid;
 
-import java.util.UUID;
+import java.util.*;
 
 import lombok.Getter;
 import lombok.Setter;
-import net.mcapi.uuid.handlers.JavaHandler;
+import net.mcapi.uuid.handlers.*;
 
 /**
  * A UUID lookup API for Java.
@@ -16,8 +16,12 @@ import net.mcapi.uuid.handlers.JavaHandler;
 public class UUIDAPI {
 
     @Getter @Setter private static UUIDHandler handler;
+    @Getter private static Set<UUIDHandler> handlers = new HashSet<UUIDHandler>();
 
     static {
+        handlers.add(new JavaHandler());
+        handlers.add(new BukkitHandler());
+        handlers.add(new BungeeHandler());
         handler = new JavaHandler();
     }
 
