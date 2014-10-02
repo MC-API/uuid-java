@@ -35,6 +35,10 @@ Would return:
 
 If the given username or UUID is invalid, `NULL` would be returned!
 
+### Compilation
+
+To compile just run ``mvn clean package`` or download the latest build from [build.mc-api.net](http://build.mc-api.net)
+
 ### Development
 
 Prerequisites:
