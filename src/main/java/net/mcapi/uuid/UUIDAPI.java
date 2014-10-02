@@ -10,6 +10,8 @@ import net.mcapi.uuid.handlers.*;
  * A UUID lookup API for Java.
  * <p>
  * Useful to convert a username to {@link UUID} and vice-versa.
+ * <br>
+ * By default the {@link JavaHandler} is used, however other handlers can be used via {@link #setHandler(UUIDHandler)}
  * 
  * @author njb_said
  */
