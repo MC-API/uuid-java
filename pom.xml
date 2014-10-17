@@ -64,6 +64,7 @@
             <groupId>com.jcabi</groupId>
             <artifactId>jcabi-http</artifactId>
             <version>1.8.2</version>
+            <classifier>jar-with-dependencies</classifier>
         </dependency>
 
         <dependency>
