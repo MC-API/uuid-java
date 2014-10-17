@@ -2,17 +2,12 @@ package net.mcapi.uuid.utils;
 
 import java.util.UUID;
 
-import lombok.Getter;
 import net.mcapi.uuid.UUIDAPI;
-
-import org.json.simple.parser.JSONParser;
 
 /**
  * Utility methods for UUIDs.
  */
 public class UUIDUtils {
-
-    @Getter private static JSONParser parser = new JSONParser();
 
     /**
      * Convert a string into a string that {@link UUID#fromString} will accept.

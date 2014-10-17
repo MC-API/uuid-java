@@ -1,17 +1,16 @@
 package net.mcapi.uuid.queries;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.concurrent.Callable;
 
-import lombok.AllArgsConstructor;
-import net.mcapi.uuid.utils.UUIDUtils;
+import javax.json.JsonObject;
+import javax.json.JsonReader;
 
-import org.json.simple.JSONObject;
+import lombok.AllArgsConstructor;
 
 import com.jcabi.aspects.Async;
+import com.jcabi.http.request.JdkRequest;
+import com.jcabi.http.response.JsonResponse;
+import com.jcabi.http.wire.AutoRedirectingWire;
 
 public @AllArgsConstructor class NameQuery implements Callable<String> {
 
@@ -19,14 +18,14 @@ public @AllArgsConstructor class NameQuery implements Callable<String> {
 
     // Might add the @Cacheable annotation
     @Async public String call() throws Exception {
-        URL url = new URL("http://mc-api.net/name/" + uuid);
-        URLConnection con = url.openConnection();
+        JsonReader jsonReturn = new JdkRequest("http://mc-api.net/name/" + uuid).through(AutoRedirectingWire.class, 1).header("User-Agent", "MC-API Java Client").fetch().as(JsonResponse.class).json();
 
-        con.addRequestProperty("User-Agent", "MC-API Java Client");
-        con.connect();
+        JsonObject object = jsonReturn.readObject();
+        if(!object.containsKey("name")) {
+            return null;
+        }
 
-        JSONObject jsonReturn = (JSONObject)UUIDUtils.getParser().parse(new BufferedReader(new InputStreamReader(con.getInputStream())));
-        return String.valueOf(jsonReturn.get("name"));
+        return object.getString("name");
     }
 
 }
