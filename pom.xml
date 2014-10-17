@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>net.mcapi.uuid</groupId>
     <artifactId>uuid-java</artifactId>
-    <version>0.0.4-TEST</version>
+    <version>0.0.4</version>
     <name>uuid-java</name>
 
     <repositories>
@@ -64,7 +64,6 @@
             <groupId>com.jcabi</groupId>
             <artifactId>jcabi-http</artifactId>
             <version>1.8.2</version>
-            <classifier>jar-with-dependencies</classifier>
         </dependency>
 
         <dependency>
