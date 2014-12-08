@@ -1,18 +1,18 @@
 package net.mcapi.uuid.queries;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.UUID;
 import java.util.concurrent.Callable;
-
-import javax.json.JsonObject;
-import javax.json.JsonReader;
 
 import lombok.AllArgsConstructor;
 import net.mcapi.uuid.utils.UUIDUtils;
 
+import org.json.simple.JSONObject;
+
 import com.jcabi.aspects.Async;
-import com.jcabi.http.request.JdkRequest;
-import com.jcabi.http.response.JsonResponse;
-import com.jcabi.http.wire.AutoRedirectingWire;
 
 public @AllArgsConstructor class UUIDQuery implements Callable<UUID> {
 
@@ -20,16 +20,19 @@ public @AllArgsConstructor class UUIDQuery implements Callable<UUID> {
 
     // Might add the @Cacheable annotation
     @Async public UUID call() throws Exception {
-        JsonReader jsonReturn = new JdkRequest("http://mc-api.net/uuid/" + name).through(AutoRedirectingWire.class, 1).header("User-Agent", "MC-API Java Client").fetch().as(JsonResponse.class).json();
+        URL url = new URL("http://mc-api.net/uuid/" + name);
+        URLConnection con = url.openConnection();
 
-        JsonObject object = jsonReturn.readObject();
-        if(!object.containsKey("uuid")) {
-            return null;
+        con.addRequestProperty("User-Agent", "MC-API Java Client");
+        con.connect();
+
+        JSONObject jsonReturn = (JSONObject)UUIDUtils.getJsonParser().parse(new BufferedReader(new InputStreamReader(con.getInputStream())));
+        if(jsonReturn.containsKey("uuid")) {
+            String uuidString = String.valueOf(jsonReturn.get("uuid"));
+            uuidString = uuidString.contains("-") ? uuidString : UUIDUtils.convertUUIDToJava(uuidString);
+            return UUID.fromString(uuidString);
         }
-
-        String uuidString = object.getString("uuid");
-        uuidString = uuidString.contains("-") ? uuidString : UUIDUtils.convertUUIDToJava(uuidString);
-        return UUID.fromString(uuidString);
+        return null;
     }
 
 }

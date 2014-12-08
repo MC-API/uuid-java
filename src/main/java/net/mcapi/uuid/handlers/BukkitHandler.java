@@ -35,7 +35,8 @@ public class BukkitHandler implements UUIDHandler {
         UUIDQuery query = new UUIDQuery(username);
 
         try {
-            UUID uuid = uuid_cache.put(username, query.call(), 1, TimeUnit.HOURS);
+            UUID uuid = query.call();
+            uuid_cache.put(username, uuid, 1, TimeUnit.HOURS);
             return uuid;
         } catch (Exception ex) {
             System.err.println("[MC-API] Could not lookup '" + username + "', returning null..");

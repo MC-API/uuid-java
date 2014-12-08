@@ -29,7 +29,8 @@ public class BungeeHandler implements UUIDHandler {
         UUIDQuery query = new UUIDQuery(username);
 
         try {
-            UUID uuid = uuid_cache.put(username, query.call(), 1, TimeUnit.HOURS);
+            UUID uuid = query.call();
+            uuid_cache.put(username, uuid, 1, TimeUnit.HOURS);
             return uuid;
         } catch (Exception ex) {
             System.err.println("[MC-API] Could not lookup '" + username + "', returning null..");
@@ -58,7 +59,8 @@ public class BungeeHandler implements UUIDHandler {
         NameQuery query = new NameQuery(uuid.toString().replace("-", ""));
 
         try {
-            String username = name_cache.put(uuid, query.call(), 1, TimeUnit.HOURS);
+            String username = query.call();
+            name_cache.put(uuid, username, 1, TimeUnit.HOURS);
             return username;
         } catch (Exception ex) {
             System.err.println("[MC-API] Could not lookup '" + uuid.toString() + "', returning null..");
