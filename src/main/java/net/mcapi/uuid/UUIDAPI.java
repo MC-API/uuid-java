@@ -12,7 +12,7 @@ import net.mcapi.uuid.handlers.*;
  * Useful to convert a username to {@link UUID} and vice-versa.
  * <br>
  * By default the {@link JavaHandler} is used, however other handlers can be used via {@link #setHandler(UUIDHandler)}
- * 
+ *
  * @author njb_said
  */
 public class UUIDAPI {
@@ -31,7 +31,7 @@ public class UUIDAPI {
      * Find the UUID that matches a username.
      * <p>
      * Result is cached for one hour.
-     * 
+     *
      * @param username username to lookup
      * @return the {@link UUID}
      */
@@ -43,7 +43,7 @@ public class UUIDAPI {
      * Find the UUID that matches a username.
      * <p>
      * Result is cached for one hour.
-     * 
+     *
      * @param username username to lookup
      * @return a string without dashes
      */
@@ -55,7 +55,7 @@ public class UUIDAPI {
      * Reverse lookup a {@link UUID} to a username string.
      * <p>
      * Result is cached for one hour.
-     * 
+     *
      * @param uuid UUID to lookup
      * @return username or <code>NULL</code> if not found
      */
@@ -68,7 +68,7 @@ public class UUIDAPI {
      * valid UUID it will be converted to one.
      * <p>
      * Result is cached for one hour.
-     * 
+     *
      * @param uuid uuid (string) to lookup
      * @return username or <code>NULL</code> if not found
      */

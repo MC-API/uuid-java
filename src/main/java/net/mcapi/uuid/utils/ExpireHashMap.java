@@ -14,8 +14,8 @@ import com.google.common.primitives.Longs;
  * has elapsed.
  * <p>
  * Note that replaced key-value associations are only collected once the
- * original expiration time has elapsed. 
- * 
+ * original expiration time has elapsed.
+ *
  * @author Kristian Stangeland
  *
  * @param <K> - type of the keys.
@@ -27,7 +27,7 @@ public class ExpireHashMap<K, V> {
         public final long expireTime;
         public final K expireKey;
         public final V expireValue;
-        
+
         public ExpireEntry(long expireTime, K expireKey, V expireValue) {
             this.expireTime = expireTime;
             this.expireKey = expireKey;
@@ -45,10 +45,10 @@ public class ExpireHashMap<K, V> {
                     + ", expireValue=" + expireValue + "]";
         }
     }
-    
+
     private Map<K, ExpireEntry> keyLookup = new HashMap<K, ExpireEntry>();
     private PriorityQueue<ExpireEntry> expireQueue =  new PriorityQueue<ExpireEntry>();
-    
+
     // View of keyLookup with direct values
     private Map<K, V> valueView = Maps.transformValues(keyLookup, new Function<ExpireEntry, V>() {
         @Override
@@ -56,17 +56,17 @@ public class ExpireHashMap<K, V> {
             return entry.expireValue;
         }
     });
-    
+
     // Supplied by the constructor
     private Ticker ticker;
-    
+
     /**
      * Construct a new hash map where each entry may expire at a given time.
      */
     public ExpireHashMap() {
         this(Ticker.systemTicker());
     }
-    
+
     /**
      * Construct a new hash map where each entry may expire at a given time.
      *
@@ -75,7 +75,7 @@ public class ExpireHashMap<K, V> {
     public ExpireHashMap(Ticker ticker) {
         this.ticker = ticker;
     }
-    
+
     /**
      * Retrieve the value associated with the given key, if it has not expired.
      *
@@ -84,11 +84,11 @@ public class ExpireHashMap<K, V> {
      */
     public V get(K key) {
         evictExpired();
-        
+
         ExpireEntry entry = keyLookup.get(key);
         return entry != null ? entry.expireValue : null;
     }
-    
+
     /**
      * Associate the given key with the given value, until the expire delay have
      * elapsed.
@@ -103,18 +103,18 @@ public class ExpireHashMap<K, V> {
         Preconditions.checkNotNull(expireUnit, "expireUnit cannot be NULL");
         Preconditions.checkState(expireDelay > 0, "expireDelay cannot be equal or less than zero.");
         evictExpired();
-        
+
         ExpireEntry entry = new ExpireEntry(
-            ticker.read() + TimeUnit.NANOSECONDS.convert(expireDelay, expireUnit), 
+            ticker.read() + TimeUnit.NANOSECONDS.convert(expireDelay, expireUnit),
             key, value
-        ); 
+        );
         ExpireEntry previous = keyLookup.put(key, entry);
-        
+
         // We enqueue its removal
         expireQueue.add(entry);
         return previous != null ? previous.expireValue : null;
     }
-    
+
     /**
      * Determine if the given key is referring to an unexpired association in
      * the map.
@@ -127,7 +127,7 @@ public class ExpireHashMap<K, V> {
 
         return keyLookup.containsKey(key);
     }
-    
+
     /**
      * Determine if the given value is referring to an unexpired association in
      * the map.
@@ -137,7 +137,7 @@ public class ExpireHashMap<K, V> {
      */
     public boolean containsValue(V value) {
         evictExpired();
-        
+
         // Linear scan is the best we've got
         for (ExpireEntry entry : keyLookup.values()) {
             if (Objects.equal(value, entry.expireValue)) {
@@ -147,7 +147,7 @@ public class ExpireHashMap<K, V> {
 
         return false;
     }
-    
+
     /**
      * Remove a key and its associated value from the map.
      *
@@ -156,11 +156,11 @@ public class ExpireHashMap<K, V> {
      */
     public V removeKey(K key) {
         evictExpired();
-        
+
         ExpireEntry entry = keyLookup.remove(key);
         return entry != null ? entry.expireValue : null;
     }
-    
+
     /**
      * Retrieve the number of entries in the map.
      *
@@ -168,10 +168,10 @@ public class ExpireHashMap<K, V> {
      */
     public int size() {
         evictExpired();
-        
+
         return keyLookup.size();
     }
-    
+
     /**
      * Retrieve a view of the keys in the current map.
      *
@@ -179,10 +179,10 @@ public class ExpireHashMap<K, V> {
      */
     public Set<K> keySet() {
         evictExpired();
-        
+
         return keyLookup.keySet();
     }
-    
+
     /**
      * Retrieve a view of all the values in the current map.
      *
@@ -190,10 +190,10 @@ public class ExpireHashMap<K, V> {
      */
     public Collection<V> values() {
         evictExpired();
-        
+
         return valueView.values();
     }
-    
+
     /**
      * Retrieve a view of all the entries in the set.
      *
@@ -201,10 +201,10 @@ public class ExpireHashMap<K, V> {
      */
     public Set<Entry<K, V>> entrySet() {
         evictExpired();
-        
+
         return valueView.entrySet();
     }
-    
+
     /**
      * Retrieve a view of this expire map as an ordinary map that does not
      * support insertion.
@@ -213,10 +213,10 @@ public class ExpireHashMap<K, V> {
      */
     public Map<K, V> asMap() {
         evictExpired();
-        
+
         return valueView;
     }
-    
+
     /**
      * Clear all references to key-value pairs that have been removed or
      * replaced before they were naturally evicted.
@@ -226,12 +226,12 @@ public class ExpireHashMap<K, V> {
     public void collect() {
         // First evict what we can
         evictExpired();
-        
+
         // Recreate the eviction queue - this is faster than removing entries in the old queue
         expireQueue.clear();
         expireQueue.addAll(keyLookup.values());
     }
-    
+
     /**
      * Clear all the entries in the current map.
      */
@@ -239,7 +239,7 @@ public class ExpireHashMap<K, V> {
         keyLookup.clear();
         expireQueue.clear();
     }
-    
+
     /**
      * Evict any expired entries in the map.
      * <p>
@@ -247,7 +247,7 @@ public class ExpireHashMap<K, V> {
      */
     protected void evictExpired() {
         long currentTime = ticker.read();
-        
+
         // Remove expired entries
         while (expireQueue.size() > 0 && expireQueue.peek().expireTime <= currentTime) {
             ExpireEntry entry = expireQueue.poll();
@@ -257,10 +257,9 @@ public class ExpireHashMap<K, V> {
             }
         }
     }
-    
+
     @Override
     public String toString() {
         return valueView.toString();
     }
 }
- 

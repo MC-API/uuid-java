@@ -16,9 +16,9 @@ public class UUIDUtils {
 
     /**
      * Convert a string into a string that {@link UUID#fromString} will accept.
-     * 
+     *
      * @param uuid uuid string (without dashes)
-     * @return a uuid compatible string 
+     * @return a uuid compatible string
      */
     public static String convertUUIDToJava(String uuid) {
         if(uuid.contains("-")) {
