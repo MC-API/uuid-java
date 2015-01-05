@@ -50,3 +50,22 @@ To compile just run ``mvn clean package`` or download the latest build from [bui
 ### Maven Repository
 
 There is a maven repository at [build.mc-api.net/plugin/repository/everything](http://build.mc-api.net/plugin/repository/everything)
+
+Maven Configuration:
+
+```xml
+    <repositories>
+        <repository>
+            <id>mcapi</id>
+            <url>http://build.mc-api.net/plugin/repository/everything/</url>
+        </repository>
+    </repositories>
+    
+    <dependencies>
+        <dependency>
+            <groupId>net.mcapi.uuid</groupId>
+            <artifactId>uuid-java</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+    </dependencies>
+```
