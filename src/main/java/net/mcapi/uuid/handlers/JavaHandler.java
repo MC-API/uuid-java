@@ -25,6 +25,7 @@ public class JavaHandler implements UUIDHandler {
 
     @Override
     public UUID getUUID(String username) {
+        username = username.toLowerCase();
         if(uuid_cache.containsKey(username)) {
             return uuid_cache.get(username);
         }

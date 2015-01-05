@@ -28,6 +28,7 @@ public class BukkitHandler implements UUIDHandler {
 
     @Override
     public UUID getUUID(String username) {
+        username = username.toLowerCase();
         if(Bukkit.getPlayer(username) != null) {
             return Bukkit.getPlayer(username).getUniqueId();
         }

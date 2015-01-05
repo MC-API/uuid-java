@@ -26,6 +26,7 @@ public class BungeeHandler implements UUIDHandler {
 
     @Override
     public UUID getUUID(String username) {
+        username = username.toLowerCase();
         if(ProxyServer.getInstance().getPlayer(username) != null) {
             return ProxyServer.getInstance().getPlayer(username).getUniqueId();
         }
