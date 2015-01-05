@@ -23,7 +23,7 @@ public class NameQuery implements Callable<String> {
 
     // Might add the @Cacheable annotation
     @Async public String call() throws Exception {
-        URL url = new URL(UUIDAPI.getRegion().buildURL() + "/name/" + uuid);
+        URL url = new URL(UUIDAPI.getRegion().buildURL() + "/v3/name/" + uuid);
         URLConnection con = url.openConnection();
 
         con.addRequestProperty("User-Agent", "MC-API Java Client");

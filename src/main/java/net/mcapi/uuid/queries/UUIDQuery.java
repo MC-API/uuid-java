@@ -24,7 +24,7 @@ public class UUIDQuery implements Callable<UUID> {
 
     // Might add the @Cacheable annotation
     @Async public UUID call() throws Exception {
-        URL url = new URL(UUIDAPI.getRegion().buildURL() + "/uuid/" + name);
+        URL url = new URL(UUIDAPI.getRegion().buildURL() + "/v3/uuid/" + name);
         URLConnection con = url.openConnection();
 
         con.addRequestProperty("User-Agent", "MC-API Java Client");
