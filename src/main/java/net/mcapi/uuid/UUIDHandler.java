@@ -16,7 +16,7 @@ public abstract interface UUIDHandler {
     public String getUsername(UUID uuid);
     public String getUsername(String uuid);
 
-    public ExpireHashMap<String, UUID> getUuid_cache();
-    public ExpireHashMap<UUID, String> getName_cache();
+    public ExpireHashMap<String, UUID> getUUIDCache();
+    public ExpireHashMap<UUID, String> getNameCache();
 
 }

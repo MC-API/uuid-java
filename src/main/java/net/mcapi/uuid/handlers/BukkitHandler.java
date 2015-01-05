@@ -3,7 +3,6 @@ package net.mcapi.uuid.handlers;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
-import lombok.Getter;
 import net.mcapi.uuid.UUIDHandler;
 import net.mcapi.uuid.queries.NameQuery;
 import net.mcapi.uuid.queries.UUIDQuery;
@@ -15,8 +14,16 @@ import org.bukkit.Bukkit;
 @SuppressWarnings("deprecation")
 public class BukkitHandler implements UUIDHandler {
 
-    @Getter private ExpireHashMap<String, UUID> uuid_cache = new ExpireHashMap<String, UUID>();
-    @Getter private ExpireHashMap<UUID, String> name_cache = new ExpireHashMap<UUID, String>();
+    private ExpireHashMap<String, UUID> uuid_cache = new ExpireHashMap<String, UUID>();
+    private ExpireHashMap<UUID, String> name_cache = new ExpireHashMap<UUID, String>();
+
+    public ExpireHashMap<String, UUID> getUUIDCache() {
+        return uuid_cache;
+    }
+
+    public ExpireHashMap<UUID, String> getNameCache() {
+        return name_cache;
+    }
 
     @Override
     public UUID getUUID(String username) {
