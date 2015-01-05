@@ -22,7 +22,7 @@ import com.google.common.base.Preconditions;
 public class UUIDAPI {
 
     private static UUIDHandler handler;
-    private final static Set<UUIDHandler> handlers = new HashSet<UUIDHandler>();
+    private final static List<UUIDHandler> handlers = new LinkedList<UUIDHandler>();
     private static ServerRegion region;
 
     /**
@@ -41,7 +41,7 @@ public class UUIDAPI {
         UUIDAPI.region = region;
     }
 
-    public static Set<UUIDHandler> getHandlers() {
+    public static List<UUIDHandler> getHandlers() {
         return handlers;
     }
 
