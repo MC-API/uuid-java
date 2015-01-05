@@ -11,7 +11,7 @@ MC-API has multiple mirrors, you can choose your mirror like so:
 ```java
 UUIDAPI.setRegion(ServerRegion)
 ```
-A list of mirrors can be found [here](https://github.com/MC-API/static#mirrors).
+A list of mirrors can be found [here](https://github.com/MC-API/static#mirrors). The default mirror is set to US.
 
 ### Usage examples:
 
@@ -50,3 +50,22 @@ To compile just run ``mvn clean package`` or download the latest build from [bui
 ### Maven Repository
 
 There is a maven repository at [build.mc-api.net/plugin/repository/everything](http://build.mc-api.net/plugin/repository/everything)
+
+Maven Configuration:
+
+```xml
+    <repositories>
+        <repository>
+            <id>mcapi</id>
+            <url>http://build.mc-api.net/plugin/repository/everything/</url>
+        </repository>
+    </repositories>
+    
+    <dependencies>
+        <dependency>
+            <groupId>net.mcapi.uuid</groupId>
+            <artifactId>uuid-java</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+    </dependencies>
+```
