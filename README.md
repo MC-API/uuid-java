@@ -1,11 +1,19 @@
 uuid-java [![Build Status](http://build.mc-api.net/buildStatus/icon?job=uuid-java)](http://build.mc-api.net/job/uuid-java/)
 =========
 
-A Java implementation of the [mc-api.net](http://mc-api.net) API.
+A Java implementation of the [mc-api.net](https://mc-api.net) API.
 
 ## Implementation
 
-Usage examples:
+**Setting request server**
+
+MC-API has multiple mirrors, you can choose your mirror like so:
+```java
+UUIDAPI.setRegion(ServerRegion)
+```
+A list of mirrors can be found [here](https://github.com/MC-API/static#mirrors).
+
+### Usage examples:
 
 **Username to UUID**
 
@@ -31,7 +39,7 @@ Would return:
 
 `njb_said`
 
-**Errors**
+### Errors
 
 If the given username or UUID is invalid, `NULL` would be returned!
 
@@ -39,7 +47,6 @@ If the given username or UUID is invalid, `NULL` would be returned!
 
 To compile just run ``mvn clean package`` or download the latest build from [build.mc-api.net](http://build.mc-api.net)
 
-### Development
+### Maven Repository
 
-Prerequisites:
-- [Lombok](http://projectlombok.org/)
+There is a maven repository at [build.mc-api.net/plugin/repository/everything](http://build.mc-api.net/plugin/repository/everything)
