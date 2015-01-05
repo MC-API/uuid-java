@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>net.mcapi.uuid</groupId>
     <artifactId>uuid-java</artifactId>
-    <version>0.0.5</version>
+    <version>1.0.0</version>
     <name>uuid-java</name>
 
     <scm>

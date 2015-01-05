@@ -22,7 +22,7 @@ import com.google.common.base.Preconditions;
 public class UUIDAPI {
 
     private static UUIDHandler handler;
-    private static Set<UUIDHandler> handlers = new HashSet<UUIDHandler>();
+    private final static Set<UUIDHandler> handlers = new HashSet<UUIDHandler>();
     private static ServerRegion region;
 
     /**
@@ -55,15 +55,7 @@ public class UUIDAPI {
      * @return the {@link UUIDHandler handler} we are using to process requests
      */
     public static UUIDHandler getHandler() {
-        if(handler == null) {
-            if(handlers.size() == 0) {
-                handlers.add(new JavaHandler());
-                handlers.add(new BukkitHandler());
-                handlers.add(new BungeeHandler());
-            }
-            handler = new JavaHandler();
-        }
-
+        Preconditions.checkArgument(handler != null, "Handler cannot be null!");
         return handler;
     }
 

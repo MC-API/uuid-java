@@ -13,7 +13,7 @@ public enum ServerRegion {
     /**
      * European servers
      */
-    EU("eu.mc-api.net", "Delta"),
+    EU("eu.mc-api.net", "Delta", "Zeta"),
 
     /**
      * American servers
@@ -29,15 +29,15 @@ public enum ServerRegion {
     private boolean https = true;
     private String[] servers;
 
-    private ServerRegion(String hostname, String... servers) {
+    private ServerRegion(String hostname, String... serverNames) {
         this.hostname = hostname;
-        this.servers = servers;
+        this.servers = serverNames;
     }
 
-    private ServerRegion(String hostname, boolean https, String... servers) {
+    private ServerRegion(String hostname, boolean https, String... serverNames) {
         this.hostname = hostname;
         this.https = https;
-        this.servers = servers;
+        this.servers = serverNames;
     }
 
     public String getHostname() {
