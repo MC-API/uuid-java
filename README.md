@@ -11,7 +11,7 @@ MC-API has multiple mirrors, you can choose your mirror like so:
 ```java
 UUIDAPI.setRegion(ServerRegion)
 ```
-A list of mirrors can be found [here](https://github.com/MC-API/static#mirrors).
+A list of mirrors can be found [here](https://github.com/MC-API/static#mirrors). The default mirror is set to US.
 
 ### Usage examples:
 
