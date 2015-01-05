@@ -3,6 +3,7 @@ package net.mcapi.uuid.handlers;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
+import net.mcapi.uuid.UUIDAPI;
 import net.mcapi.uuid.UUIDHandler;
 import net.mcapi.uuid.queries.NameQuery;
 import net.mcapi.uuid.queries.UUIDQuery;
@@ -36,6 +37,7 @@ public class JavaHandler implements UUIDHandler {
             return uuid;
         } catch (Exception ex) {
             System.err.println("[MC-API] Could not lookup '" + username + "', returning null..");
+            System.err.println("[MC-API] Server: " + UUIDAPI.getRegion().toString() + " (" + UUIDAPI.getRegion().buildURL() + ")");
             return null;
         }
     }
@@ -62,6 +64,7 @@ public class JavaHandler implements UUIDHandler {
             return username;
         } catch (Exception ex) {
             System.err.println("[MC-API] Could not lookup '" + uuid.toString() + "', returning null..");
+            System.err.println("[MC-API] Server: " + UUIDAPI.getRegion().toString() + " (" + UUIDAPI.getRegion().buildURL() + ")");
             return null;
         }
     }
