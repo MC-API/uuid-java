@@ -13,17 +13,17 @@ public enum ServerRegion {
     /**
      * European servers
      */
-    EU("eu.mc-api.net", "Delta", "Zeta"),
+    EU("eu.mc-api.net", false, "Delta", "Zeta"),
 
     /**
      * American servers
      */
-    US("us.mc-api.net", "Iota"),
+    US("us.mc-api.net", false, "Iota"),
 
     /**
      * Australian servers
      */
-    AU("au.mc-api.net", "Zeus");
+    AU("au.mc-api.net", false, "Zeus");
 
     private String hostname;
     private boolean https = true;
