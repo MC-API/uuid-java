@@ -1,8 +1,8 @@
 package net.mcapi.uuid;
 
-import java.util.*;
+import java.util.UUID;
 
-import net.mcapi.uuid.handlers.*;
+import net.mcapi.uuid.handlers.JavaHandler;
 
 import com.google.common.base.Preconditions;
 
@@ -16,13 +16,14 @@ import com.google.common.base.Preconditions;
  * <br>By default the {@link JavaHandler}
  * is used, however other handlers can be
  * used via {@link #setHandler(UUIDHandler)}
+ * <p>
+ * By default the {@link ServerRegion US server region} is used for queries, you change this via {@link #setRegion(ServerRegion)}
  *
  * @author njb_said
  */
 public class UUIDAPI {
 
     private static UUIDHandler handler;
-    private final static List<UUIDHandler> handlers = new LinkedList<UUIDHandler>();
     private static ServerRegion region;
 
     /**
@@ -37,12 +38,13 @@ public class UUIDAPI {
         return region;
     }
 
+    /**
+     * Change the {@link ServerRegion} we will use
+     *
+     * @param region new region to use for queries
+     */
     public static void setRegion(ServerRegion region) {
         UUIDAPI.region = region;
-    }
-
-    public static List<UUIDHandler> getHandlers() {
-        return handlers;
     }
 
     public static void setHandler(UUIDHandler newHandler) {
@@ -60,9 +62,6 @@ public class UUIDAPI {
     }
 
     static {
-        handlers.add(new JavaHandler());
-        handlers.add(new BukkitHandler());
-        handlers.add(new BungeeHandler());
         handler = new JavaHandler();
         region = ServerRegion.US;
     }
