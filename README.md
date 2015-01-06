@@ -3,6 +3,21 @@ uuid-java [![Build Status](http://build.mc-api.net/buildStatus/icon?job=uuid-jav
 
 A Java implementation of the [mc-api.net](https://mc-api.net) API.
 
+## Custom Handlers
+
+A handler decides how to get a uuid or username. The default handler will just query the API and then cache the result. However you can create your own, custom handler.
+
+There are two premade for [Bukkit](https://bukkit.org)/[Spigot](http://spigotmc.org) and [BungeeCord](https://github.com/spigotmc/bungeecord):
+- [Bukkit Handler](https://gist.github.com/njb-said/cec2f56907e8eaa54021)
+- [Bungee Handler](https://gist.github.com/njb-said/39e1b0fdebc18b02fc14)
+
+Just implement these somewhere within your project and then set it as the active handler using this example (example is for the BungeeHandler.
+```java
+UUIDAPI.setHandler(new BungeeHandler());
+```
+
+**We suggest you put it in the package:** `net.mcapi.uuid.handlers`
+
 ## Implementation
 
 **Setting request server**
