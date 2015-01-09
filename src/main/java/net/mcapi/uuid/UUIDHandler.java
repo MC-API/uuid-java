@@ -7,6 +7,7 @@ import net.mcapi.uuid.utils.ExpireHashMap;
 /**
  * An interface to represent a handler for UUID conversions
  *
+ * // TODO: Add javadoc into this
  * @author njb_said
  */
 public abstract interface UUIDHandler {
