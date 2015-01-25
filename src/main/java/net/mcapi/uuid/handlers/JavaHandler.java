@@ -5,8 +5,7 @@ import java.util.concurrent.TimeUnit;
 
 import net.mcapi.uuid.UUIDAPI;
 import net.mcapi.uuid.UUIDHandler;
-import net.mcapi.uuid.queries.NameQuery;
-import net.mcapi.uuid.queries.UUIDQuery;
+import net.mcapi.uuid.queries.APIQuery;
 import net.mcapi.uuid.utils.ExpireHashMap;
 import net.mcapi.uuid.utils.UUIDUtils;
 
@@ -30,10 +29,10 @@ public class JavaHandler implements UUIDHandler {
             return uuid_cache.get(username);
         }
 
-        UUIDQuery query = new UUIDQuery(username);
+        APIQuery query = new APIQuery(username, "full_uuid");
 
         try {
-            UUID uuid = query.call();
+            UUID uuid = UUID.fromString(query.request());
             uuid_cache.put(username, uuid, 1, TimeUnit.HOURS);
             return uuid;
         } catch (Exception ex) {
@@ -57,10 +56,9 @@ public class JavaHandler implements UUIDHandler {
             return name_cache.get(uuid);
         }
 
-        NameQuery query = new NameQuery(uuid.toString().replace("-", ""));
-
+        APIQuery query = new APIQuery(uuid.toString().replace("-", ""), "name");
         try {
-            String username = query.call();
+            String username = query.request();
             name_cache.put(uuid, username, 1, TimeUnit.HOURS);
             return username;
         } catch (Exception ex) {

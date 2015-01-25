@@ -1,10 +1,14 @@
 package net.mcapi.uuid;
 
+import java.io.IOException;
 import java.util.UUID;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import net.mcapi.uuid.handlers.JavaHandler;
 
 import com.google.common.base.Preconditions;
+import com.mashape.unirest.http.Unirest;
 
 /**
  * A UUID lookup API for Java and
@@ -23,6 +27,7 @@ import com.google.common.base.Preconditions;
  */
 public class UUIDAPI {
 
+    private static ExecutorService service;
     private static UUIDHandler handler;
     private static ServerRegion region;
 
@@ -64,6 +69,22 @@ public class UUIDAPI {
     static {
         handler = new JavaHandler();
         region = ServerRegion.US;
+        Unirest.setTimeouts(3500, 15000);
+        service = Executors.newFixedThreadPool(5);
+
+        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+            public void run() {
+                if(!service.isShutdown()) {
+                    service.shutdown();
+                }
+                try {
+                    Unirest.shutdown();
+                } catch (IOException ex) {
+                    System.err.println("Error while shutting down MC-API unirest library: " + ex.getLocalizedMessage());
+                }
+                System.out.println("[MC-API] Shutdown");
+            }
+        }));
     }
 
     /**
@@ -114,6 +135,10 @@ public class UUIDAPI {
      */
     public static String getUsername(String uuid) {
         return handler.getUsername(uuid);
+    }
+
+    public static ExecutorService getExecutor() {
+        return service;
     }
 
 }

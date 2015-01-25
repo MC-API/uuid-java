@@ -5,11 +5,11 @@ A Java implementation of the [mc-api.net](https://mc-api.net) API.
 
 ## Custom Handlers
 
-A handler decides how to get a uuid or username. The default handler will just query the API and then cache the result. However you can create your own, custom handler.
+A handler decides how a uuid or username is obtained. The default handler will just query the API and then cache the result. However you can create your own, custom handler.
 
 There are two premade for [Bukkit](https://bukkit.org)/[Spigot](http://spigotmc.org) and [BungeeCord](https://github.com/spigotmc/bungeecord):
-- [Bukkit Handler](https://gist.github.com/njb-said/cec2f56907e8eaa54021)
-- [Bungee Handler](https://gist.github.com/njb-said/39e1b0fdebc18b02fc14)
+- [Bukkit Handler](https://gist.github.com/njb-said/cec2f56907e8eaa54021): Checks if player is online or has played before, before querying API
+- [Bungee Handler](https://gist.github.com/njb-said/39e1b0fdebc18b02fc14): Checks if player is online before querying API
 
 Just implement these somewhere within your project and then set it as the active handler using this example (example is for the BungeeHandler.
 ```java
