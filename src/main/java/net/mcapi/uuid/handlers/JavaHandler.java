@@ -29,7 +29,7 @@ public class JavaHandler implements UUIDHandler {
             return uuid_cache.get(username);
         }
 
-        APIQuery query = new APIQuery(username, "full_uuid");
+        APIQuery query = new APIQuery(username, "full_uuid", "uuid");
 
         try {
             UUID uuid = UUID.fromString(query.request());
