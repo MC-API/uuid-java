@@ -80,7 +80,7 @@ Maven Configuration:
         <dependency>
             <groupId>net.mcapi.uuid</groupId>
             <artifactId>uuid-java</artifactId>
-            <version>1.0.0</version>
+            <version>1.0.6</version>
         </dependency>
     </dependencies>
 ```
