@@ -57,6 +57,7 @@ public class JavaHandler implements UUIDHandler {
         }
 
         APIQuery query = new APIQuery(uuid.toString().replace("-", ""), "name");
+
         try {
             String username = query.request();
             name_cache.put(uuid, username, 1, TimeUnit.HOURS);
