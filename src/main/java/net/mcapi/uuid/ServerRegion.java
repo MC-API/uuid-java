@@ -23,7 +23,12 @@ public enum ServerRegion {
     /**
      * Australian servers
      */
-    AU("au.mc-api.net", false, "Zeus");
+    AU("au.mc-api.net", false, "Zeus"),
+
+    /**
+     * Automatic server determined by our proxy
+     */
+    AUTO("mc-api.net", false, "All");
 
     private String hostname;
     private boolean https = true;
