@@ -3,6 +3,10 @@ uuid-java [![Build Status](http://build.mc-api.net/buildStatus/icon?job=uuid-jav
 
 A Java implementation of the [mc-api.net](https://mc-api.net) API.
 
+## Bugs and Issues
+
+If you encounter any issues or bugs with our services or this library, please report them [here](https://github.com/mc-api/issues).
+
 ## Custom Handlers
 
 A handler decides how a uuid or username is obtained. The default handler will just query the API and then cache the result. However you can create your own, custom handler.
