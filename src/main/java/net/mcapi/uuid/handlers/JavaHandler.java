@@ -1,26 +1,16 @@
 package net.mcapi.uuid.handlers;
 
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 import net.mcapi.uuid.UUIDAPI;
 import net.mcapi.uuid.UUIDHandler;
 import net.mcapi.uuid.queries.APIQuery;
-import net.mcapi.uuid.utils.ExpireHashMap;
+import net.mcapi.uuid.queries.HistoryCallable;
 import net.mcapi.uuid.utils.UUIDUtils;
+import net.mcapi.uuid.utils.Username;
 
-public class JavaHandler implements UUIDHandler {
-
-    private ExpireHashMap<String, UUID> uuid_cache = new ExpireHashMap<String, UUID>();
-    private ExpireHashMap<UUID, String> name_cache = new ExpireHashMap<UUID, String>();
-
-    public ExpireHashMap<String, UUID> getUUIDCache() {
-        return uuid_cache;
-    }
-
-    public ExpireHashMap<UUID, String> getNameCache() {
-        return name_cache;
-    }
+public class JavaHandler extends UUIDHandler {
 
     @Override
     public UUID getUUID(String username) {
@@ -64,6 +54,27 @@ public class JavaHandler implements UUIDHandler {
             return username;
         } catch (Exception ex) {
             System.err.println("[MC-API] Could not lookup '" + uuid.toString() + "', returning null..");
+            System.err.println("[MC-API] Server: " + UUIDAPI.getRegion().toString() + " (" + UUIDAPI.getRegion().buildURL() + ")");
+            return null;
+        }
+    }
+
+    @Override
+    public List<Username> getHistory(UUID uuid) {
+        List<Username> list = new LinkedList<Username>();
+
+        HistoryCallable callable = new HistoryCallable(uuid.toString().replace("-", ""));
+        List<Username> request;
+        try {
+            request = callable.request();
+
+            if(request != null && !request.isEmpty()) {
+                list.addAll(request);
+            }
+
+            return list;
+        } catch (Exception ex) {
+            System.err.println("[MC-API] Could not lookup history for '" + uuid.toString() + "', returning null..");
             System.err.println("[MC-API] Server: " + UUIDAPI.getRegion().toString() + " (" + UUIDAPI.getRegion().buildURL() + ")");
             return null;
         }

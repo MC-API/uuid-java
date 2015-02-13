@@ -1,11 +1,13 @@
 package net.mcapi.uuid;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import net.mcapi.uuid.handlers.JavaHandler;
+import net.mcapi.uuid.utils.Username;
 
 import com.google.common.base.Preconditions;
 import com.mashape.unirest.http.Unirest;
@@ -85,6 +87,18 @@ public class UUIDAPI {
                 System.out.println("[MC-API] Shutdown");
             }
         }));
+    }
+
+    /**
+     * Get a list of past usernames for a uuid
+     * <p>
+     * Can be empty if user has not changed name
+     * or uuid not found
+     *
+     * @return a list of {@link Username username objects}
+     */
+    public static List<Username> getHistory(UUID uuid) {
+        return handler.getHistory(uuid);
     }
 
     /**
