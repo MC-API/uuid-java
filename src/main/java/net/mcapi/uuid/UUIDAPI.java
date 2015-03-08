@@ -71,11 +71,6 @@ public class UUIDAPI {
     static {
         handler = new JavaHandler();
         region = ServerRegion.US;
-        new Thread(new Runnable() {
-            public void run() {
-                Unirest.setTimeouts(3500, 15000);
-            }
-        }).start();
         service = Executors.newFixedThreadPool(5);
 
         Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
