@@ -13,7 +13,7 @@ public enum ServerRegion {
     /**
      * European servers
      */
-    EU("eu.mc-api.net", false, "Delta", "Zeta"),
+    EU("eu.mc-api.net", false, "Delta"),
 
     /**
      * American servers
