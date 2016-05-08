@@ -1,7 +1,5 @@
 package net.mcapi.uuid;
 
-import java.util.*;
-
 /**
  * Represents a region we have
  * request taking servers in
@@ -13,36 +11,28 @@ public enum ServerRegion {
     /**
      * European servers
      */
-    EU("eu.mc-api.net", false, "Delta"),
+    EU("eu.mc-api.net", false),
 
     /**
      * American servers
      */
-    US("us.mc-api.net", false, "Iota"),
-
-    /**
-     * Australian servers
-     */
-    AU("au.mc-api.net", false, "Zeus"),
+    US("us.mc-api.net", false),
 
     /**
      * Automatic server determined by our proxy
      */
-    AUTO("mc-api.net", false, "All");
+    AUTO("mc-api.net", false);
 
     private String hostname;
     private boolean https = true;
-    private String[] servers;
 
-    private ServerRegion(String hostname, String... serverNames) {
+    private ServerRegion(String hostname) {
         this.hostname = hostname;
-        this.servers = serverNames;
     }
 
-    private ServerRegion(String hostname, boolean https, String... serverNames) {
+    private ServerRegion(String hostname, boolean https) {
         this.hostname = hostname;
         this.https = https;
-        this.servers = serverNames;
     }
 
     public String getHostname() {
@@ -51,10 +41,6 @@ public enum ServerRegion {
 
     public boolean allowsHTTPS() {
         return https;
-    }
-
-    public List<String> getServers() {
-        return new ArrayList<String>(Arrays.asList(servers));
     }
 
     public String buildURL() {
