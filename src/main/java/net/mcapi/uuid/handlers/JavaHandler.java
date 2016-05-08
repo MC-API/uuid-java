@@ -1,7 +1,6 @@
 package net.mcapi.uuid.handlers;
 
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 
 import net.mcapi.uuid.UUIDAPI;
 import net.mcapi.uuid.UUIDHandler;
@@ -15,15 +14,15 @@ public class JavaHandler extends UUIDHandler {
     @Override
     public UUID getUUID(String username) {
         username = username.toLowerCase();
-        if(uuid_cache.containsKey(username)) {
-            return uuid_cache.get(username);
+        if(uuidResponseCache.getIfPresent(username) != null) {
+            return uuidResponseCache.getIfPresent(username);
         }
 
         APIQuery query = new APIQuery(username, "full_uuid", "uuid");
 
         try {
             UUID uuid = UUID.fromString(query.request());
-            uuid_cache.put(username, uuid, 1, TimeUnit.HOURS);
+            uuidResponseCache.put(username, uuid);
             return uuid;
         } catch (Exception ex) {
             System.err.println("[MC-API] Could not lookup '" + username + "', returning null..");
@@ -42,15 +41,15 @@ public class JavaHandler extends UUIDHandler {
 
     @Override
     public String getUsername(UUID uuid) {
-        if(name_cache.containsKey(uuid)) {
-            return name_cache.get(uuid);
+        if(nameResponseCache.getIfPresent(uuid) != null) {
+            return nameResponseCache.getIfPresent(uuid);
         }
 
         APIQuery query = new APIQuery(uuid.toString().replace("-", ""), "name");
 
         try {
             String username = query.request();
-            name_cache.put(uuid, username, 1, TimeUnit.HOURS);
+            nameResponseCache.put(uuid, username);
             return username;
         } catch (Exception ex) {
             System.err.println("[MC-API] Could not lookup '" + uuid.toString() + "', returning null..");

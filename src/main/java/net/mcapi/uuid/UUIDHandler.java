@@ -2,8 +2,11 @@ package net.mcapi.uuid;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
-import net.mcapi.uuid.utils.ExpireHashMap;
+import com.google.common.cache.Cache;
+import com.google.common.cache.CacheBuilder;
+
 import net.mcapi.uuid.utils.Username;
 
 /**
@@ -14,15 +17,36 @@ import net.mcapi.uuid.utils.Username;
  */
 public abstract class UUIDHandler {
 
-    protected ExpireHashMap<String, UUID> uuid_cache = new ExpireHashMap<String, UUID>();
-    protected ExpireHashMap<UUID, String> name_cache = new ExpireHashMap<UUID, String>();
+    protected Cache<String, UUID> uuidResponseCache = CacheBuilder.newBuilder().expireAfterWrite(1, TimeUnit.HOURS).build();
+    protected Cache<UUID, String> nameResponseCache = CacheBuilder.newBuilder().expireAfterWrite(1, TimeUnit.HOURS).build();
+    
+    @Deprecated
+    protected net.mcapi.uuid.utils.ExpireHashMap<String, UUID> uuid_cache = new net.mcapi.uuid.utils.ExpireHashMap<String, UUID>();
+    @Deprecated
+    protected net.mcapi.uuid.utils.ExpireHashMap<UUID, String> name_cache = new net.mcapi.uuid.utils.ExpireHashMap<UUID, String>();
 
-    public ExpireHashMap<String, UUID> getUUIDCache() {
+    /**
+     * @deprecated As of version 1.1.3, use {@link UUIDHandler#getUUIDResponseCache()}
+     */
+    @Deprecated
+    public net.mcapi.uuid.utils.ExpireHashMap<String, UUID> getUUIDCache() {
         return uuid_cache;
     }
 
-    public ExpireHashMap<UUID, String> getNameCache() {
+    /**
+     * @deprecated As of version 1.1.3, use {@link UUIDHandler#getNameResponseCache()}
+     */
+    @Deprecated
+    public net.mcapi.uuid.utils.ExpireHashMap<UUID, String> getNameCache() {
         return name_cache;
+    }
+    
+    public Cache<String, UUID> getUUIDResponseCache() {
+        return uuidResponseCache;
+    }
+    
+    public Cache<UUID, String> getNameResponseCache() {
+        return nameResponseCache;
     }
 
     /**
